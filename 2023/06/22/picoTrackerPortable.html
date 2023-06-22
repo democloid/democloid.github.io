@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1"><!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>picoTrackerPortable | democloid</title>
+<meta name="generator" content="Jekyll v4.2.2" />
+<meta property="og:title" content="picoTrackerPortable" />
+<meta name="author" content="" />
+<meta property="og:locale" content="en_US" />
+<meta name="description" content="TL;DR picoTracker is a DIY music tracker that can be built with off the shelf components and built by soldering all the components together using wires, this is laborious, prone to errors and limits some of the design choices. I set myself to create a PCB for the project that could be easily built to make things easier. This set me off in a different direction and ended up creating a portable version of the picoTracker." />
+<meta property="og:description" content="TL;DR picoTracker is a DIY music tracker that can be built with off the shelf components and built by soldering all the components together using wires, this is laborious, prone to errors and limits some of the design choices. I set myself to create a PCB for the project that could be easily built to make things easier. This set me off in a different direction and ended up creating a portable version of the picoTracker." />
+<link rel="canonical" href="http://0.0.0.0:4000/2023/06/22/picoTrackerPortable.html" />
+<meta property="og:url" content="http://0.0.0.0:4000/2023/06/22/picoTrackerPortable.html" />
+<meta property="og:site_name" content="democloid" />
+<meta property="og:type" content="article" />
+<meta property="article:published_time" content="2023-06-22T00:00:00-05:00" />
+<meta name="twitter:card" content="summary" />
+<meta property="twitter:title" content="picoTrackerPortable" />
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"BlogPosting","author":{"@type":"Person","name":""},"dateModified":"2023-06-22T00:00:00-05:00","datePublished":"2023-06-22T00:00:00-05:00","description":"TL;DR picoTracker is a DIY music tracker that can be built with off the shelf components and built by soldering all the components together using wires, this is laborious, prone to errors and limits some of the design choices. I set myself to create a PCB for the project that could be easily built to make things easier. This set me off in a different direction and ended up creating a portable version of the picoTracker.","headline":"picoTrackerPortable","mainEntityOfPage":{"@type":"WebPage","@id":"http://0.0.0.0:4000/2023/06/22/picoTrackerPortable.html"},"url":"http://0.0.0.0:4000/2023/06/22/picoTrackerPortable.html"}</script>
+<!-- End Jekyll SEO tag -->
+<link rel="stylesheet" href="/assets/css/style.css"><link type="application/atom+xml" rel="alternate" href="http://0.0.0.0:4000/feed.xml" title="democloid" />
+</head>
+<body><header class="site-header">
+
+  <div class="wrapper"><a class="site-title" rel="author" href="/">democloid</a><nav class="site-nav">
+        <input type="checkbox" id="nav-trigger" class="nav-trigger" />
+        <label for="nav-trigger">
+          <span class="menu-icon">
+            <svg viewBox="0 0 18 15" width="18px" height="15px">
+              <path d="M18,1.484c0,0.82-0.665,1.484-1.484,1.484H1.484C0.665,2.969,0,2.304,0,1.484l0,0C0,0.665,0.665,0,1.484,0 h15.032C17.335,0,18,0.665,18,1.484L18,1.484z M18,7.516C18,8.335,17.335,9,16.516,9H1.484C0.665,9,0,8.335,0,7.516l0,0 c0-0.82,0.665-1.484,1.484-1.484h15.032C17.335,6.031,18,6.696,18,7.516L18,7.516z M18,13.516C18,14.335,17.335,15,16.516,15H1.484 C0.665,15,0,14.335,0,13.516l0,0c0-0.82,0.665-1.483,1.484-1.483h15.032C17.335,12.031,18,12.695,18,13.516L18,13.516z"/>
+            </svg>
+          </span>
+        </label>
+
+        <div class="trigger"><a class="page-link" href="/about/">About</a></div>
+      </nav></div>
+</header>
+<main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-header">
+    <h1 class="post-title p-name" itemprop="name headline">picoTrackerPortable</h1>
+    <p class="post-meta"><time class="dt-published" datetime="2023-06-22T00:00:00-05:00" itemprop="datePublished">
+        Jun 22, 2023
+      </time>~<time class="dt-modified" datetime="2023-06-22T00:00:00-05:00" itemprop="dateModified">
+          Jun 22, 2023
+        </time><span class="p-time" itemprop="projectTime"> / 50 hours</span></p>
+  </header>
+
+  <div class="post-content e-content" itemprop="articleBody">
+    <h2 id="tldr">TL;DR</h2>
+<p><a href="https://github.com/democloid/picoTracker">picoTracker</a> is a DIY music tracker that can be built with off the shelf components and built by soldering all the components together using wires, this is laborious, prone to errors and limits some of the design choices. I set myself to create a PCB for the project that could be easily built to make things easier. This set me off in a different direction and ended up creating a portable version of the picoTracker.</p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/final.jpg" alt="final" />
+<!--more--></p>
+
+<h2 id="introduction">Introduction</h2>
+<p>When I first created picoTracker I thought I’d do a prototype with ready made parts and then I would do the <em>real</em> hardware. As time went on, I created the case for it which came out pretty nicely, and I kinda liked the approachable DIY aspect of it. I still wanted to make something easier to build and more custom. Iterating on it took me through a rabbit hole of ideas, what other hardware I could add? better audio? Better display? more flash?</p>
+
+<p>I was stuck for a while on a back and forth between wanting to add too much and wanting to make both devices compatible. In the end I settled for doing an almost identical hardware version of the original but in an integrated form and defer the crazy ideas to the future. Problem is that when I started to work on it I got bored, I was doing exactly the same thing as before, not fun. Plus there where problems with fit, final board not really too DIY because I couldn’t find all through hole components, etc. Then at some point I was looking at my original prototype hardware and the 3x4 mechanical switches tester assembly I used as a inputs into picoTracker and noticed how similar the size of the screen and the 3x4 keypad layout were, why not make a minimal version of the picoTracker? maybe portable? and so it started…</p>
+
+<p>Wanted to do a detailed post about how I went along to design this, but I was procrastinating too much. So I’ll just write a short post about the overall design with some pictures and go into greater details later, maybe.</p>
+
+<h3 id="hardware-specs">Hardware specs</h3>
+<ul>
+  <li>15MB sample memory</li>
+  <li>3.5mm Stereo Headphone/Line output</li>
+  <li>3.5mm TRS MIDI in/out</li>
+  <li>2.8” display</li>
+  <li>Micro SD Card Slot</li>
+  <li>1200mAh battery - up to 3 hours runtime</li>
+  <li>Dimensions: 80mm x 125mm x 17mm</li>
+  <li>Weight: 115g</li>
+</ul>
+
+<h3 id="case">Case</h3>
+<p>The case was the first thing I built. I designed it’s dimensions according to the size of the components that went in it, and this in turn set the dimensions of the main PCB. Of course I went through some iterations, but the overall design has stayed the same. The main change in the final version vs most of the development is that when I received the final PCB I realized that the original battery didn’t hold up as long as I expected. I explored using a bigger battery (802535 vs original 602535, that is, 2mm thicker), so I raised the PCB 2mm up. This in turn left the original 3D printed keycaps a bit low and it didn’t look as good, but then I realized that maybe I could use low profile commercial keycaps now. I tried DSA keycaps and the fit was great.</p>
+
+<p>I designed this case in a way that could be machined using CNC (I think, not much experience with it). I haven’t done any actual prototypes in it, but it seems it would cost ~50 USD to build one in PCBWay, which is pretty reasonable.</p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/case_angle.png" alt="case angle" /></p>
+<p style="text-align: center;">Final design</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/case_exploded.png" alt="case exploded" /></p>
+<p style="text-align: center;">Exploded case</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/early.jpg" alt="early design" /></p>
+<p style="text-align: center;">Original design with the 602535 battery and 3D printed keys</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/styles.jpg" alt="styles" /></p>
+<p style="text-align: center;">Playing with different colors, but the *official* color is purple. Given that the keycaps in the final design are not 3D printed it might be hard to match Bezel and keycaps colors. Black or some other unrelated color can be a good alternative</p>
+<p> </p>
+
+<h3 id="pcb">PCB</h3>
+<p>Layout was mostly decided according to the space available, on the top there is USB power (and potential future MIDI or whatever), MIDI In/Out and Headphone/Line out. On one side there is the SD card slot and on the other an on/off switch. At the bottom of the case there is a hole in order to reach the BOOTSEL switch, if needed. It’s built in two pieces, a very simple one for the switches and a second one with all the components. All components are on one side, and the other side is occupied by the display. Both boards are attached using standard 2.54 pitch male header pins. I tried to find some kind of connector better suited for this, for example something that is detachable, but couldn’t find anything very convenient. Cost of producing the PCB with assembly service came down to about 22 USD for 5 boards, including shipping.</p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/pcb_front.png" alt="pcb front" /></p>
+<p style="text-align: center;">The back of the main board has all the components</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/pcb_back.png" alt="pcb back" /></p>
+<p style="text-align: center;">The top is where all the display goes, there's not much space for anything else</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/pcb_real.jpg" alt="pcb real" /></p>
+<p style="text-align: center;">Final product</p>
+<p> </p>
+
+<h3 id="assembly">Assembly</h3>
+<p>Some pictures on how the final product is built and assembled into the case.</p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_4.jpg" alt="assembly step 1" /></p>
+<p style="text-align: center;">Attach standard male 2.54mm headers onto keypad PCB</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_5.jpg" alt="assembly step 2" /></p>
+<p style="text-align: center;">Solder the switches into it. Cherry low profile switches are used</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_1.jpg" alt="assembly step 3" /></p>
+<p style="text-align: center;">The back of the main PCB is dedicated to the display, the footprint shows how to align the flex cable for soldering and through holes align the display on final assembly</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_2.jpg" alt="assembly step 4" /></p>
+<p style="text-align: center;">Display pre assembly</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_3.jpg" alt="assembly step 5" /></p>
+<p style="text-align: center;">Adhesive cover is peeled off and flex cable aligned onto the PCB for soldering</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_6.jpg" alt="assembly step 6" /></p>
+<p style="text-align: center;">On the other side of the PCB we need to attach the battery. Used double sided tape</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_7.jpg" alt="assembly step 7" /></p>
+<p style="text-align: center;">Battery in place</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_8.jpg" alt="assembly step 8" /></p>
+<p style="text-align: center;">Cables soldered</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_9.jpg" alt="assembly step 9" /></p>
+<p style="text-align: center;">Ready to put the components in the case</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_10.jpg" alt="assembly step 10" /></p>
+<p style="text-align: center;">Keypad PCB goes first</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_11.jpg" alt="assembly step 11" /></p>
+<p style="text-align: center;">Before placing the main PCB, we need to put the power on switch in place</p>
+<p> </p>
+
+<p><img src="/assets/img/2023-6-22-picoTrackerPortable/assembly_12.jpg" alt="assembly step 12" /></p>
+<p style="text-align: center;">Place main PCB and solder headers in place. Done! The rest is cosmetic, install switches and screw in the bezel</p>
+<p> </p>
+
+<h3 id="future-power-optimization">Future: power optimization</h3>
+<p>When I was building picoTracker I never cared much about power consumption, since it wasn’t going to be a mobile platform. When I started to go in that direction I measured consumption and determined that it wasn’t too high, so it would be feasible to build this and have some decent battery life. Still, I may have done something wrong because it turns out that battery lasts less than I expected, still decent tho. There are a couple of things that could be done to improve this.</p>
+
+<h4 id="hardware">Hardware</h4>
+<ul>
+  <li>Improve power supply: right now it’s just simple LDO regulators, so it’s probably ~70% - 80% efficient, according to my calculations. Potentially worse.</li>
+  <li>Brightness control of LCD: The backlight of the LCD is fixed to VCC. There are some pins left to be able to actually set brightness through PWM.</li>
+  <li>Power down devices when not in use: DAC and headphone amp could be shut down when not playing, unsure if and how much this would save.</li>
+</ul>
+
+<h4 id="software">Software</h4>
+<ul>
+  <li>Reduce CPU frequency when not needed: picoTracker currently runs at 220.5MHz, which is needed to render all tracks. But this is only needed when playing sounds, when editing tracks and even playing single samples (i.e. when previewing samples) it could probably run 1/4 or 1/8 frequency without affecting the workflow much. Tested this briefly and it saves quite a bit of power.</li>
+</ul>
+
+  </div>
+
+  <div>
+      
+      
+      <a href="/tag/rp2040"><code class="highligher-rouge"><nobr>#rp2040</nobr></code></a>
+      
+      
+      <a href="/tag/hardware"><code class="highligher-rouge"><nobr>#hardware</nobr></code></a>
+      
+      
+      <a href="/tag/picotracker"><code class="highligher-rouge"><nobr>#picotracker</nobr></code></a>
+      
+  </div><a class="u-url" href="/2023/06/22/picoTrackerPortable.html" hidden></a>
+</article>
+
+      </div>
+    </main><footer class="site-footer h-card">
+  <data class="u-url" href="/"></data>
+
+  <div class="wrapper">
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col">
+        <p class="feed-subscribe">
+          <a href="/feed.xml">
+            <svg class="svg-icon orange">
+              <use xlink:href="/assets/minima-social-icons.svg#rss"></use>
+            </svg><span>Subscribe</span>
+          </a>
+        </p>
+        <ul class="contact-list">
+          <li class="p-name"></li>
+          <li><a class="u-email" href="mailto:"></a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p>Site containing information related to current interests, I&#39;ll post here whenever I have something interesting to say.</p>
+      </div>
+    </div>
+
+    <div class="social-links"><ul class="social-media-list"><li><a rel="me" href="https://github.com/democloid" target="_blank" title="democloid"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg></a></li><li><a rel="me" href="https://twitter.com/democloid" target="_blank" title="democloid"><svg class="svg-icon grey"><use xlink:href="/assets/minima-social-icons.svg#twitter"></use></svg></a></li></ul>
+</div>
+
+  </div>
+
+</footer>
+</body>
+
+</html>
